@@ -9,7 +9,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { initialMessages } from '../../components/Chat'
 import { type Message } from '../../components/ChatLine'
-import $ from "/Users/andersluffman/Documents/GitHub/meowton3/jquery-3.6.3.js"
 
 
 // break the app if the API key is missing
@@ -103,16 +102,13 @@ export default async function handler(req: NextRequest) {
   }
 
   console.log("NEW RESPONSE:");
-  console.log(data.choices[0].text);
+  let sentanceParse = data.choices[0].text.replaceAll(' ', '#');
+  console.log(sentanceParse)
 
-  (<any>$).ajax({
-    type: "POST",
-    url: "~/search.py",
-    data: { param: data.choices[0].text}
-  }).done(function(o) {
-     console.log("it is done: ")
-     console.log(o)
-  });
+  //const resource = await fetch('http://localhost:1066/api/sematicsearch/' + sentanceParse);
+  const resource = await fetch("http://localhost:1066/api/sematicsearch/Meow!#That's#a#great#question!#Derivation#is#an#important#step#in#calculus,#and#it#involves#taking#the#derivative#of#a#function.#To#do#this,#you'll#need#to#use#the#power#rule,#chain#rule,#and/or#product#rule.#Let#meow#help#you#figure#out#which#one#is#best#for#the#function#you're#looking#at.#Purrhaps#you#can#start#by#showing#me#the#equation#you're#trying#to#work#with?");
+  //let resourceJson = resource.json()
+  console.log(resource)
 
   // return response with 200 and stringify json text
   return NextResponse.json({ text: data.choices[0].text })
