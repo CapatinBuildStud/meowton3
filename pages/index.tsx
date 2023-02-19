@@ -37,7 +37,7 @@ function Home() {
                 width={500}
                 height={500}
               />
-              <div class = "descriptionMeowton">I'm Sir Isaac Meowton, creator of calculus and full-time feline. Ask me about calculus!</div>
+              <div class = "descriptionMeowton">I am Sir Isaac Meowton, creator of calculus and full-time feline. Ask me about calculus!</div>
               <br></br>
             </div>
           </div>
