@@ -87,11 +87,23 @@ export function Chat() {
 
     // strip out white spaces from the bot message
     const botNewMessage = data.text.trim()
+    console.log(data.resource)
+    // if (data.resource != undefined) {
+    //   let resourceText = "For more information, check out this " + data.resource.type + " by "  + data.resource.source + " at " + data.resource.link;
+    //  console.log(resourceText)
+    //   setMessages([
+    //     ...newMessages,
+    //     { message: botNewMessage, who: 'bot' } as Message,
+    //     { message: resourceText, who: 'bot' } as Message
+    //   ])
+    // }
 
+    console.log
     setMessages([
       ...newMessages,
       { message: botNewMessage, who: 'bot' } as Message,
     ])
+
     setLoading(false)
   }
 

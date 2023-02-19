@@ -25,7 +25,7 @@ function Home() {
             </div>
             <div className="lg:w-3/10 mathcat-photo">
               <div>
-                x
+              
               </div>
               <div>
                 

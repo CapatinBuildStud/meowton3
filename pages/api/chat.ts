@@ -7,8 +7,9 @@
 // }  
 
 import { type NextRequest, NextResponse } from 'next/server'
-import { initialMessages } from '../../components/Chat'
+import { initialMessages, Chat} from '../../components/Chat'
 import { type Message } from '../../components/ChatLine'
+import Home from '../index'
 
 
 // break the app if the API key is missing
@@ -105,14 +106,21 @@ export default async function handler(req: NextRequest) {
   let sentanceParse = data.choices[0].text.trim().replaceAll(' ', '#');
   console.log(sentanceParse)
   
-  let resource = '';
+  let resource = {type: '', source: "", link: ""};
 
   fetch('http://127.0.0.1:5000/api/' + sentanceParse)
   .then((response) => response.json())
-  .then((res) => resource = res);
+  .then((res) => {resource = res; console.log(resource)});
 
-  setTimeout(() => { console.log(resource); }, 5000);
+  let textMessage = data.choices[0].text;
 
-  // return response with 200 and stringify json text
-  return NextResponse.json({ text: data.choices[0].text })
+   
+  if (body.messages.length == 3) {
+    console.log("attempting to input resources")
+    await new Promise(r => setTimeout(r, 10000));
+    console.log(resource)
+    textMessage = data.choices[0].text + "\n\nFor more information, check out this " + resource.type + " by "  + resource.source + " at " + resource.link;
+  }
+  
+  return NextResponse.json({ text: textMessage})
 }
