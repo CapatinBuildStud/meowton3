@@ -3,15 +3,6 @@ import torch
 
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
-# a corpus of several texts
-corpus = ['A man is eating food. A man is eating a piece of bread.',
-          'The girl is carrying a baby. A man is riding a horse. A woman is playing violin.',
-          'Two men pushed carts through the woods. A man is riding a white horse on an enclosed ground. A monkey is playing drums. A cheetah is running behind its prey.'
-          ]
-
-# user prompt
-query = 'A man is eating pasta.'
-
 def best_text(corpus, query):
     all_sentences = {}
     i = 0
