@@ -103,12 +103,14 @@ export default async function handler(req: NextRequest) {
   }
 
   console.log("NEW RESPONSE:");
-  let sentanceParse = data.choices[0].text.trim().replaceAll(' ', '#');
+  let sentanceParse = data.choices[0].text.replaceAll(' ', '%20');
+  sentanceParse = sentanceParse.slice(3)
   console.log(sentanceParse)
   
   let resource = {type: '', source: "", link: ""};
-
-  fetch('http://127.0.0.1:5000/api/' + sentanceParse)
+  let link = 'http://127.0.0.1:5000/api/' + sentanceParse
+  console.log(link)
+  fetch(link)
   .then((response) => response.json())
   .then((res) => {resource = res; console.log(resource)});
 
