@@ -102,13 +102,16 @@ export default async function handler(req: NextRequest) {
   }
 
   console.log("NEW RESPONSE:");
-  let sentanceParse = data.choices[0].text.replaceAll(' ', '#');
+  let sentanceParse = data.choices[0].text.trim().replaceAll(' ', '#');
   console.log(sentanceParse)
+  
+  let resource = '';
 
-  //const resource = await fetch('http://localhost:1066/api/sematicsearch/' + sentanceParse);
-  const resource = await fetch("http://localhost:1066/api/sematicsearch/Meow!#That's#a#great#question!#Derivation#is#an#important#step#in#calculus,#and#it#involves#taking#the#derivative#of#a#function.#To#do#this,#you'll#need#to#use#the#power#rule,#chain#rule,#and/or#product#rule.#Let#meow#help#you#figure#out#which#one#is#best#for#the#function#you're#looking#at.#Purrhaps#you#can#start#by#showing#me#the#equation#you're#trying#to#work#with?");
-  //let resourceJson = resource.json()
-  console.log(resource)
+  fetch('http://127.0.0.1:5000/api/' + sentanceParse)
+  .then((response) => response.json())
+  .then((res) => resource = res);
+
+  setTimeout(() => { console.log(resource); }, 5000);
 
   // return response with 200 and stringify json text
   return NextResponse.json({ text: data.choices[0].text })
