@@ -1,6 +1,16 @@
+// if (typeof document !== 'undefined') {
+//   var script = document.createElement('script');
+//   script.src = 'https://code.jquery.com/jquery-3.6.3.min.js';
+//   document.body.appendChild(script);
+// } else {
+//   console.log("NOOO")
+// }  
+
 import { type NextRequest, NextResponse } from 'next/server'
 import { initialMessages } from '../../components/Chat'
 import { type Message } from '../../components/ChatLine'
+import $ from "/Users/andersluffman/Documents/GitHub/meowton3/jquery-3.6.3.js"
+
 
 // break the app if the API key is missing
 if (!process.env.OPENAI_API_KEY) {
@@ -46,8 +56,9 @@ export default async function handler(req: NextRequest) {
 
   // const messages = req.body.messages
   const messagesPrompt = generatePromptFromMessages(body.messages)
+  console.log("MESSAGES:")
   console.log(body.messages)
-  if (body.messages.message[2] !=  null) {console.log("SHOULD BE CHAT: " + body.messages.message[2] + ", END")};
+  //if (body.messages.message[2] !=  null) {console.log("SHOULD BE CHAT: " + body.messages.message[2] + ", END")};
   const defaultPrompt = `I am Friendly AI Assistant. \n\nThis is the conversation between AI Bot and a news reporter.\n\n${botName}: ${firstMessge}\n${userName}: ${messagesPrompt}\n${botName}: `
   const finalPrompt = process.env.AI_PROMPT
     ? `${process.env.AI_PROMPT}${messagesPrompt}\n${botName}: `
@@ -90,6 +101,18 @@ export default async function handler(req: NextRequest) {
       text: `ERROR with API integration. ${data.error.message}`,
     })
   }
+
+  console.log("NEW RESPONSE:");
+  console.log(data.choices[0].text);
+
+  (<any>$).ajax({
+    type: "POST",
+    url: "~/search.py",
+    data: { param: data.choices[0].text}
+  }).done(function(o) {
+     console.log("it is done: ")
+     console.log(o)
+  });
 
   // return response with 200 and stringify json text
   return NextResponse.json({ text: data.choices[0].text })

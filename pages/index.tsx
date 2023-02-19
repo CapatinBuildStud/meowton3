@@ -8,15 +8,31 @@ import { Chat } from '../components/Chat'
           Routes, and OpenAI API.
         </Text>
       </section>
+
+
+
+      <img src="isaacmeowton.png" alt="Sir Isaac Meowton"></img>
 */
 function Home() {
   return (  
     <Page className="flex flex-col gap-12">
-      <section className="flex flex-col gap-3">
+      <section>
+        <section className="flex flex-col gap-3">
         <Text variant="h2">MathCat</Text>
-        <div className="lg:w-2/3">
-          <Chat/>
-        </div>
+          <div className = 'mathcat-cointainer'>
+            <div className="lg:w-2/3 mathcat-chatbox">
+              <Chat/>
+            </div>
+            <div className="lg:w-3/10 mathcat-photo">
+              <div>
+                x
+              </div>
+              <div>
+                
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
     </Page>
     
