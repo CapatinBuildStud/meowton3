@@ -9,11 +9,11 @@ const COOKIE_NAME = 'nextjs-example-ai-chat-gpt3'
 export const initialMessages: Message[] = [
   {
     who: 'bot',
-    message: 'I am cat sir issac meowton and i will help you with your math.',
+    message: 'Hi! I am Sir Isaac Meowton, and I can help you with calculus! Meeeow!',
   },
   {
     who: 'bot',
-    message: 'what is your question?',
+    message: 'How can I help you?',
   }
 
 ]
@@ -37,6 +37,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       }}
     />
     <Button
+      id = "buttonSay"
       type="submit"
       className="ml-4 flex-none"
       onClick={() => {
@@ -87,11 +88,23 @@ export function Chat() {
 
     // strip out white spaces from the bot message
     const botNewMessage = data.text.trim()
+    console.log(data.resource)
+    // if (data.resource != undefined) {
+    //   let resourceText = "For more information, check out this " + data.resource.type + " by "  + data.resource.source + " at " + data.resource.link;
+    //  console.log(resourceText)
+    //   setMessages([
+    //     ...newMessages,
+    //     { message: botNewMessage, who: 'bot' } as Message,
+    //     { message: resourceText, who: 'bot' } as Message
+    //   ])
+    // }
 
+    console.log
     setMessages([
       ...newMessages,
       { message: botNewMessage, who: 'bot' } as Message,
     ])
+
     setLoading(false)
   }
 

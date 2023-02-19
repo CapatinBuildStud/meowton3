@@ -1,13 +1,23 @@
+// if (typeof document !== 'undefined') {
+//   var script = document.createElement('script');
+//   script.src = 'https://code.jquery.com/jquery-3.6.3.min.js';
+//   document.body.appendChild(script);
+// } else {
+//   console.log("NOOO")
+// }  
+
 import { type NextRequest, NextResponse } from 'next/server'
-import { initialMessages } from '../../components/Chat'
+import { initialMessages, Chat} from '../../components/Chat'
 import { type Message } from '../../components/ChatLine'
+import Home from '../index'
+
 
 // break the app if the API key is missing
 if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing Environment Variable OPENAI_API_KEY')
 }
 
-const botName = 'Sir Issac Meowton'
+const botName = 'Sir Isaac Meowton'
 const userName = 'Student' // TODO: move to ENV var
 const firstMessge = initialMessages[0].message
 
@@ -46,6 +56,9 @@ export default async function handler(req: NextRequest) {
 
   // const messages = req.body.messages
   const messagesPrompt = generatePromptFromMessages(body.messages)
+  console.log("MESSAGES:")
+  console.log(body.messages)
+  //if (body.messages.message[2] !=  null) {console.log("SHOULD BE CHAT: " + body.messages.message[2] + ", END")};
   const defaultPrompt = `I am Friendly AI Assistant. \n\nThis is the conversation between AI Bot and a news reporter.\n\n${botName}: ${firstMessge}\n${userName}: ${messagesPrompt}\n${botName}: `
   const finalPrompt = process.env.AI_PROMPT
     ? `${process.env.AI_PROMPT}${messagesPrompt}\n${botName}: `
@@ -89,6 +102,25 @@ export default async function handler(req: NextRequest) {
     })
   }
 
-  // return response with 200 and stringify json text
-  return NextResponse.json({ text: data.choices[0].text })
+  console.log("NEW RESPONSE:");
+  let sentanceParse = data.choices[0].text.trim().replaceAll(' ', '#');
+  console.log(sentanceParse)
+  
+  let resource = {type: '', source: "", link: ""};
+
+  fetch('http://127.0.0.1:5000/api/' + sentanceParse)
+  .then((response) => response.json())
+  .then((res) => {resource = res; console.log(resource)});
+
+  let textMessage = data.choices[0].text;
+
+   
+  if (body.messages.length == 3) {
+    console.log("attempting to input resources")
+    await new Promise(r => setTimeout(r, 10000));
+    console.log(resource)
+    textMessage = data.choices[0].text + "\n\nFor more information, check out this " + resource.type + " by "  + resource.source + " at " + resource.link;
+  }
+  
+  return NextResponse.json({ text: textMessage})
 }
