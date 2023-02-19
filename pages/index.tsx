@@ -15,7 +15,7 @@ function Home() {
       <section className="flex flex-col gap-3">
         <Text variant="h2">AI Chat Bot:</Text>
         <div className="lg:w-2/3">
-          <Chat />
+          <Chat/>
         </div>
       </section>
     </Page>
