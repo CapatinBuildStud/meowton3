@@ -17,7 +17,7 @@ if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing Environment Variable OPENAI_API_KEY')
 }
 
-const botName = 'Sir Issac Meowton'
+const botName = 'Sir Isaac Meowton'
 const userName = 'Student' // TODO: move to ENV var
 const firstMessge = initialMessages[0].message
 

@@ -9,11 +9,11 @@ const COOKIE_NAME = 'nextjs-example-ai-chat-gpt3'
 export const initialMessages: Message[] = [
   {
     who: 'bot',
-    message: 'Hi! I am Sir Issac Meowton, and I can help you with calculus! Meeeeow!',
+    message: 'Hi! I am Sir Isaac Meowton, and I can help you with calculus! Meeeow!',
   },
   {
     who: 'bot',
-    message: 'What is your question?',
+    message: 'How can I help you?',
   }
 
 ]
@@ -37,6 +37,7 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       }}
     />
     <Button
+      id = "buttonSay"
       type="submit"
       className="ml-4 flex-none"
       onClick={() => {

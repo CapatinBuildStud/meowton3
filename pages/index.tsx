@@ -17,19 +17,22 @@ function Home() {
   return (  
     <Page className="flex flex-col gap-12">
       <section>
+      <div className="center-div">
+        <Text variant="h1"><span id = "calculus">Calculus</span>Cat</Text>
+        <Text>Re-learning how we learn math—with cats!</Text>
+        <br></br>
+      </div>
+
         <section className="flex flex-col gap-3">
-        <Text variant="h2">MathCat</Text>
           <div className = 'mathcat-cointainer'>
-            <div className="lg:w-2/3 mathcat-chatbox">
+            <div className="lg:w-2/3 lg:h-2/3 mathcat-chatbox">
               <Chat/>
             </div>
             <div className="lg:w-3/10 mathcat-photo">
-              <div>
-              
-              </div>
-              <div>
-                
-              </div>
+              <br></br>
+              <img src="/isaacmeowton.png/"></img>
+              <div class = "descriptionMeowton">I'm Sir Isaac Meowton, creator of calculus and full-time feline. Ask me about calculus!</div>
+              <br></br>
             </div>
           </div>
         </section>
