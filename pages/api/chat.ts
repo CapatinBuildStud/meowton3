@@ -7,7 +7,7 @@ if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing Environment Variable OPENAI_API_KEY')
 }
 
-const botName = 'AI'
+const botName = 'Sir Issac Meowton'
 const userName = 'Student' // TODO: move to ENV var
 const firstMessge = initialMessages[0].message
 
@@ -52,7 +52,7 @@ export default async function handler(req: NextRequest) {
     : defaultPrompt
 
   const payload = {
-    model: 'davinci:ft-meowton-2023-02-19-02-50-20',
+    model: 'text-davinci-003',
     prompt: finalPrompt,
     temperature: process.env.AI_TEMP ? parseFloat(process.env.AI_TEMP) : 0.7,
     max_tokens: process.env.AI_MAX_TOKENS
