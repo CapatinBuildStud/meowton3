@@ -1,5 +1,7 @@
 import { Layout, Text, Page } from '@vercel/examples-ui'
 import { Chat } from '../components/Chat'
+import Image from 'next/image'
+
 /*
       <section className="flex flex-col gap-6">
         <Text variant="h1">OpenAI GPT-3 text model usage example</Text>
@@ -30,7 +32,11 @@ function Home() {
             </div>
             <div className="lg:w-3/10 mathcat-photo">
               <br></br>
-              <img src="/isaacmeowton.png/"></img>
+              <Image
+                src="/isaacmeowton.png"
+                width={500}
+                height={500}
+              />
               <div class = "descriptionMeowton">I'm Sir Isaac Meowton, creator of calculus and full-time feline. Ask me about calculus!</div>
               <br></br>
             </div>
