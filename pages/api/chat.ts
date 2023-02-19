@@ -52,7 +52,7 @@ export default async function handler(req: NextRequest) {
     : defaultPrompt
 
   const payload = {
-    model: 'text-davinci-003',
+    model: 'davinci:ft-meowton-2023-02-19-02-50-20',
     prompt: finalPrompt,
     temperature: process.env.AI_TEMP ? parseFloat(process.env.AI_TEMP) : 0.7,
     max_tokens: process.env.AI_MAX_TOKENS
